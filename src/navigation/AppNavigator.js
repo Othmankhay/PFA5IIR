@@ -1,4 +1,5 @@
 import React from 'react';
+import { View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import TabNavigator from './TabNavigator';
@@ -9,19 +10,30 @@ import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import { useResponsive } from '../../hooks/useResponsive';
 import { StatusBar } from 'react-native';
+import ChatbotWidget from '../components/ChatbotWidget';
 
 const Stack = createNativeStackNavigator();
 
-// Admin Main Navigator
+// Admin Main Navigator with Chatbot Widget
 const AdminMainNavigator = () => {
     const { isDesktop } = useResponsive();
-    return isDesktop ? <DrawerNavigator /> : <TabNavigator />;
+    return (
+        <View style={{ flex: 1 }}>
+            {isDesktop ? <DrawerNavigator /> : <TabNavigator />}
+            <ChatbotWidget />
+        </View>
+    );
 };
 
-// Client Main Navigator
+// Client Main Navigator with Chatbot Widget
 const ClientMainNavigator = () => {
     const { isDesktop } = useResponsive();
-    return isDesktop ? <ClientDrawerNavigator /> : <ClientTabNavigator />;
+    return (
+        <View style={{ flex: 1 }}>
+            {isDesktop ? <ClientDrawerNavigator /> : <ClientTabNavigator />}
+            <ChatbotWidget />
+        </View>
+    );
 };
 
 const AppNavigator = () => {

@@ -14,7 +14,16 @@ const ClientsScreen = () => {
     const [search, setSearch] = useState('');
     const [clients, setClients] = useState(CLIENTS);
     const [modalVisible, setModalVisible] = useState(false);
-    const [newClient, setNewClient] = useState({ name: '', email: '', phone: '', address: '', type: 'Particulier' });
+    const [newClient, setNewClient] = useState({ 
+        name: '', 
+        email: '', 
+        phone: '', 
+        address: '', 
+        type: 'Particulier',
+        poolStyle: '',
+        poolDimensions: '',
+        poolDepth: ''
+    });
 
     // Selection state
     const [selectedIds, setSelectedIds] = useState([]);
@@ -35,7 +44,16 @@ const ClientsScreen = () => {
             };
             setClients([...clients, clientToAdd]);
             setModalVisible(false);
-            setNewClient({ name: '', email: '', phone: '', address: '', type: 'Particulier' });
+            setNewClient({ 
+                name: '', 
+                email: '', 
+                phone: '', 
+                address: '', 
+                type: 'Particulier',
+                poolStyle: '',
+                poolDimensions: '',
+                poolDepth: ''
+            });
         }
     };
 
@@ -215,6 +233,28 @@ const ClientsScreen = () => {
                                 value={newClient.address}
                                 onChangeText={(text) => setNewClient({ ...newClient, address: text })}
                             />
+                            
+                            <Text style={styles.sectionTitle}>Infos Piscine</Text>
+                            <TextInput
+                                style={styles.input}
+                                placeholder="Style de piscine (ex: Enterrée, Hors-sol)"
+                                value={newClient.poolStyle}
+                                onChangeText={(text) => setNewClient({ ...newClient, poolStyle: text })}
+                            />
+                            <View style={styles.rowInputs}>
+                                <TextInput
+                                    style={[styles.input, { flex: 1, marginRight: 8 }]}
+                                    placeholder="Dimensions (m)"
+                                    value={newClient.poolDimensions}
+                                    onChangeText={(text) => setNewClient({ ...newClient, poolDimensions: text })}
+                                />
+                                <TextInput
+                                    style={[styles.input, { flex: 1, marginLeft: 8 }]}
+                                    placeholder="Profondeur (m)"
+                                    value={newClient.poolDepth}
+                                    onChangeText={(text) => setNewClient({ ...newClient, poolDepth: text })}
+                                />
+                            </View>
 
                             <Button title="Enregistrer" onPress={handleAddClient} style={styles.submitButton} />
                         </View>
@@ -378,6 +418,17 @@ const styles = StyleSheet.create({
     },
     submitButton: {
         marginTop: SPACING.s,
+    },
+    sectionTitle: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: COLORS.text,
+        marginBottom: SPACING.m,
+        marginTop: SPACING.s,
+    },
+    rowInputs: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
     },
 });
 
